@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Hand Sign Detector</string>
+    <string name="accessibility_desc">Lets pinch hand gestures scroll the screen system-wide.</string>
+</resources>

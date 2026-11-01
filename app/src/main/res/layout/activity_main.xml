@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Foreground UI. Platform widgets only (no extra deps). IDs must match MainActivity. -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/signText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Press Start"
+            android:textColor="@color/fg"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Model loads on start."
+            android:textColor="@color/muted"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/statsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0 hands · – fps"
+            android:textColor="@color/muted"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/serviceStateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Background service: stopped"
+            android:textColor="@color/muted"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/startBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Start camera" />
+
+            <Button
+                android:id="@+id/stopBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Stop" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bgBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Run in background (foreground service)" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/captureBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Capture now" />
+
+            <Button
+                android:id="@+id/screenBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Allow screenshots" />
+
+            <Button
+                android:id="@+id/accessBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Allow scrolling" />
+        </LinearLayout>
+
+        <Switch
+            android:id="@+id/scrollSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Pinch to scroll (system-wide needs Allow scrolling)"
+            android:textColor="@color/fg" />
+
+        <Switch
+            android:id="@+id/seqSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Palm then fist to screenshot"
+            android:textColor="@color/fg" />
+
+        <Switch
+            android:id="@+id/wakeSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Keep CPU awake in background"
+            android:textColor="@color/fg" />
+
+        <TextView
+            android:id="@+id/gainLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Scroll speed: 1600"
+            android:textColor="@color/fg"
+            android:textSize="13sp" />
+
+        <SeekBar
+            android:id="@+id/gainSeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="4000"
+            android:min="400"
+            android:progress="1600" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Scroll test zone (pinch-scrolls here when app is open):"
+            android:textColor="@color/muted"
+            android:textSize="13sp" />
+
+        <ScrollView
+            android:id="@+id/demoScroll"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/card">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="01 Pinch thumb + index, hold, move hand up/down to scroll this box.\n\n02 In background the same pinch scrolls whatever app is open (needs Allow scrolling).\n\n03 Palm hold half a second, then Fist within 3s, takes a screenshot.\n\n04 Screenshots need Allow screenshots (one system prompt).\n\n05 Fill 06 Fill 07 Fill 08 Fill 09 Fill 10 Fill 11 Fill 12 End."
+                android:textColor="@color/fg"
+                android:textSize="14sp" />
+        </ScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Captures:"
+            android:textColor="@color/muted"
+            android:textSize="13sp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/galleryRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Log:"
+            android:textColor="@color/muted"
+            android:textSize="13sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/card">
+
+            <TextView
+                android:id="@+id/logText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="–"
+                android:textColor="@color/fg"
+                android:textSize="12sp" />
+        </ScrollView>
+    </LinearLayout>
+</ScrollView>

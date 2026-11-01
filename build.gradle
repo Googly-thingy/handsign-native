@@ -1,0 +1,6 @@
+// Top-level build file. Open the src/android folder in Android Studio (Ladybug or newer,
+// JDK 17) and let Gradle sync. Model file auto-downloads on first build (see app/build.gradle).
+plugins {
+    id("com.android.application") version "8.3.2" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.22" apply false
+}

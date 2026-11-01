@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- NATIVE app manifest (not a WebAPK / Trusted Web Activity). Camera stays alive in a
+     foreground service; system scroll goes through the AccessibilityService; screenshots
+     go through MediaProjection. None of that is possible from a browser wrapper. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Only needed on API 26-28 for saving captures to Pictures/. -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.HandSign">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Foreground service: keeps the FRONT camera + detection running while the app
+             is backgrounded (persistent notification). camera|mediaProjection covers both
+             the tracking stream and on-demand screenshot capture. -->
+        <service
+            android:name=".TrackingService"
+            android:exported="false"
+            android:foregroundServiceType="camera|mediaProjection" />
+
+        <!-- System-wide scroll: performs swipe gestures on behalf of pinch moves.
+             User must enable it once in Settings > Accessibility. -->
+        <service
+            android:name=".GestureAccessibilityService"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+    </application>
+</manifest>
