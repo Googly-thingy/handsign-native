@@ -19,7 +19,9 @@ tasks.register("downloadModel") {
     }
 }
 
-// Correct Kotlin DSL hook to make preBuild wait for the download
-tasks.named("preBuild") {
-    dependsOn("downloadModel")
+// Safely hook into the Android build lifecycle after it evaluates
+afterEvaluate {
+    tasks.named("preBuild") {
+        dependsOn("downloadModel")
+    }
 }
