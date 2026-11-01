@@ -5,7 +5,7 @@ tasks.register("downloadModel") {
     doLast {
         if (!modelFile.exists()) {
             modelFile.parentFile.mkdirs()
-            val urlString = "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task"
+            val urlString = "https://googleapis.com"
             println("Downloading hand_landmarker.task ...")
             java.net.URL(urlString).openStream().use { input ->
                 modelFile.outputStream().use { output ->
@@ -18,4 +18,8 @@ tasks.register("downloadModel") {
         }
     }
 }
-preBuild.dependsOn("downloadModel")
+
+// Correct Kotlin DSL hook to make preBuild wait for the download
+tasks.named("preBuild") {
+    dependsOn("downloadModel")
+}
